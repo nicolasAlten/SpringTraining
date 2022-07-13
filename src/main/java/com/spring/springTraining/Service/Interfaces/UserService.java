@@ -1,13 +1,16 @@
 package com.spring.springTraining.Service.Interfaces;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.spring.springTraining.Entity.UserEntity;
 import com.spring.springTraining.Model.User;
 
+import java.util.List;
+
 public interface UserService {
-    String getUsers();
-    int getUserById(int id);
-    User postUser(User user);
+    List<UserEntity> getUsers();
+    UserEntity getUserById(int id);
+    UserEntity postUser(UserEntity user);
     JsonNode postJsonUser(JsonNode jsonNode);
-    User deleteUser(User user);
-    User updateUser(User user);
+    String deleteUser(int id);
+    UserEntity updateUser(UserEntity user);
 }

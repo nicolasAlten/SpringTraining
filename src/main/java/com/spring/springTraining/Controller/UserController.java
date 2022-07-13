@@ -1,6 +1,7 @@
 package com.spring.springTraining.Controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.spring.springTraining.Entity.UserEntity;
 import com.spring.springTraining.Model.User;
 import com.spring.springTraining.Service.Interfaces.UserService;
 import org.slf4j.Logger;
@@ -8,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/users")
@@ -19,18 +22,19 @@ public class UserController {
 
     @GetMapping("/getUsers")
     @ResponseBody
-    public String getUser(){
+    public List<UserEntity> getUser(){
         return userService.getUsers();
     }
 
     @GetMapping("/getUserById/{id}")
-    public int getUser(@PathVariable("id") int id){
+    @ResponseBody
+    public UserEntity getUser(@PathVariable("id") int id){
         return userService.getUserById(id);
     }
 
     @PostMapping("/postUser")
     @ResponseBody
-    public User postUser(@RequestBody User user){
+    public UserEntity postUser(@RequestBody UserEntity user){
         logger.info("=============== inside post method");
         return userService.postUser(user);
     }
@@ -43,16 +47,16 @@ public class UserController {
         return userService.postJsonUser(json);
     }
 
-    @DeleteMapping("/deleteUser")
+    @DeleteMapping("/deleteUser/{id}")
     @ResponseBody
-    public User deleteUser(@RequestBody User user){
+    public String deleteUser(@PathVariable int id){
         logger.info("=============== inside delete method");
-        return userService.deleteUser(user);
+        return userService.deleteUser(id);
     }
 
     @PutMapping("/updateUser")
     @ResponseBody
-    public User update(@RequestBody User user){
+    public UserEntity update(@RequestBody UserEntity user){
         logger.info("=============== inside put method");
         return userService.updateUser(user);
     }

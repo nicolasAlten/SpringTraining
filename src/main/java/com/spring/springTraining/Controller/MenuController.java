@@ -1,43 +1,43 @@
 package com.spring.springTraining.Controller;
 
 import com.spring.springTraining.Model.Menu;
+import com.spring.springTraining.Service.Interfaces.MenuService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/menu")
+@RestController
 public class MenuController {
+    @Autowired
+    private MenuService menuService;
 
     @GetMapping("/getMenu")
     public String getMenu(){
-        return "this is the menu without id";
+        return menuService.getMenu();
     }
 
     @GetMapping("/getMenu/{id}")
-    public String getMenuById(@PathVariable int id){
-        return "this is the menu with id" + id;
+    public Menu getMenuById(@PathVariable int id){
+        return menuService.getMenuById(id);
     }
 
     @GetMapping("/getMenu/{soda}/{cake}")
     public Menu getMenuByIdAndByUser(@PathVariable String soda, @PathVariable String cake){
-        Menu menu = new Menu();
-        menu.setCake(cake);
-        menu.setSoda(soda);
-        return menu;
+        return menuService.getMenuByIdAndByUser(soda,cake);
     }
 
     @PostMapping("/setMenu")
-    public Menu getMenu(@RequestBody Menu menu){
-        return menu;
+    public Menu setMenu(@RequestBody Menu menu){
+        return menuService.setMenu(menu);
     }
 
     @PutMapping("/setMenu")
     public Menu putMenu(@RequestBody Menu menu){
-        return menu;
+        return menuService.putMenu(menu);
     }
 
     @DeleteMapping("/setMenu")
     public Menu deleteMenu(@RequestBody Menu menu){
-        return menu;
+        return menuService.deleteMenu(menu);
     }
 }
