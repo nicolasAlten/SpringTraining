@@ -27,6 +27,7 @@ public class UserController {
     @GetMapping("/getUsers")
     @ResponseBody
     public List<UserEntity> getUser(){
+        //extra security measures
         return userService.getUsers();
     }
 
